@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+
+mat = pd.read_csv('student-mat.csv', encoding="utf-8", index_col=0)
+por = pd.read_csv('student-por.csv', encoding="utf-8", index_col=0)
+
+merge = mat.merge(por, how='outer')
+
+# merge.reset_index(drop=True)
+# merge.reindex(np.arange(0,1045))
+# print(merge.columns)
+print(merge)
+
+merge.to_csv('student-total.csv')
+# Checked that both files are not equal
+'''
+with open(
+        'student-mat.csv', encoding='utf-8'
+) as file_1, open(
+    'student-por.csv', encoding='utf-8'
+) as file_2:
+    file_1_lines = file_1.readlines()
+    file_2_lines = file_2.readlines()
+
+with open(
+    'differences.csv',
+    'w',
+    encoding='utf-8'
+) as differences_file:
+    for line in file_2_lines:
+        if line not in file_1_lines:
+            print(line)
+            differences_file.write(line)
+
+print(differences_file)
+'''
